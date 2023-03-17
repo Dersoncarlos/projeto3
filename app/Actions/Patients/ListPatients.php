@@ -8,6 +8,6 @@ class ListPatients
 {
     public static function execute()
     {
-        return Patient::with(['address'])->get();
+        return Patient::with(['address'])->paginate(5);
     }
 }
