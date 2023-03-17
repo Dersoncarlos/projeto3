@@ -11,14 +11,6 @@ return new class extends Migration
      */
     public function up(): void
     {
-
-        //         Foto do Paciente;
-        // Nome Completo do Paciente;
-        // Nome Completo da Mãe;
-        // Data de Nascimento;
-        // CPF;
-        // SNC;
-        // Endereço completo, (CEP, Endereço, Número, Complemento, Bairro, Cidade e Estado)*;
         Schema::create('patients', function (Blueprint $table) {
             $table->id();
             $table->string("photo")->nullable();
@@ -26,7 +18,7 @@ return new class extends Migration
             $table->string("mother_full_name");
             $table->string("birthday");
             $table->integer("cpf");
-            $table->string("snc")->nullable();
+            $table->string("cns")->nullable();
             $table->timestamps();
         });
     }

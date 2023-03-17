@@ -12,7 +12,7 @@ class GetPatientByCPF
 
     public function execute(string $cpf)
     {
-        $patient = $this->_patientModel->where('cpf', $cpf)->first();
+        $patient = $this->_patientModel->where('cpf', toOnlyNumbers($cpf))->first();
 
         if (empty($patient)) {
             throw new \Exception("Patient not found", 404);
