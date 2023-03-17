@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string("full_name");
             $table->string("mother_full_name");
             $table->string("birthday");
-            $table->string("cpf");
+            $table->integer("cpf");
             $table->string("snc")->nullable();
             $table->timestamps();
         });

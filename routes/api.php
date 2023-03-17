@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Patients\DeletePatientController;
+use App\Http\Controllers\Patients\GetPatientController;
 use App\Http\Controllers\Patients\ListPatientsController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,5 +18,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'patients'], function () {
     Route::get('/', ListPatientsController::class);
+    Route::get('/{cpf}', GetPatientController::class);
     Route::delete('/{patientId}', DeletePatientController::class);
 });

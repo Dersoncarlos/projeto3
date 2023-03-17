@@ -22,7 +22,7 @@ class PatientFactory extends Factory
             'full_name' => $faker->name(),
             'mother_full_name' => $faker->name("female"),
             'birthday' => $faker->date(),
-            'cpf' => $faker->cpf(),
+            'cpf' => $faker->cpf(false),
         ];
     }
 }
