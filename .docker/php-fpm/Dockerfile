@@ -14,18 +14,24 @@ RUN apt-get update \
     git \
     zip \
     libbz2-dev \
-    && apt-get clean; 
+    && apt-get clean;
 
 RUN docker-php-ext-install bcmath bz2 curl opcache sockets intl
 
 RUN yes | pecl install xdebug-3.1.5 \
-    && echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini 
+    && echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini
 
-# Install PHP extensions    
+RUN set -ex \
+  && apk --no-cache add \
+    postgresql-dev
+
+RUN docker-php-ext-install pdo pdo_pgsql
+
+# Install PHP extensions
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && php composer-setup.php \
     && mv composer.phar /usr/local/bin/composer
-    
+
 #GD
 RUN apt-get update && apt-get install -y \
         libfreetype6-dev \
