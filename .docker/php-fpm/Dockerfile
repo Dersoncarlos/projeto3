@@ -22,8 +22,9 @@ RUN yes | pecl install xdebug-3.1.5 \
     && echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini
 
 RUN set -ex \
-  && apk --no-cache add \
-    postgresql-dev
+	&& apk --no-cache add postgresql-libs postgresql-dev \
+	&& docker-php-ext-install pgsql pdo_pgsql \
+	&& apk del postgresql-dev
 
 RUN docker-php-ext-install pdo pdo_pgsql
 
