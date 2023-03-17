@@ -14,7 +14,7 @@ return new class extends Migration
         // CEP, Endereço, Número, Complemento, Bairro, Cidade e Estado)
         Schema::create('adresses', function (Blueprint $table) {
             $table->id();
-            $table->integer("cep");
+            $table->string("cep");
             $table->string("address");
             $table->string("number");
             $table->string("complement");
@@ -24,7 +24,7 @@ return new class extends Migration
 
             $table->unsignedBigInteger("patient_id");
 
-            $table->foreign("patient_id")->references("id")->on("patients");
+            $table->foreign("patient_id")->references("id")->on("patients")->onDelete('cascade');
 
             $table->timestamps();
         });

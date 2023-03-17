@@ -1,6 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Patients\DeletePatientController;
+use App\Http\Controllers\Patients\ListPatientsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['prefix' => 'patients'], function () {
+    Route::get('/', ListPatientsController::class);
+    Route::delete('/{patientId}', DeletePatientController::class);
 });
