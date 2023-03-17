@@ -54,4 +54,5 @@ services:
       POSTEGRES_PASSWORD: ${POSTEGRES_ROOT_PASSWORD}
 networks:
   projeto3-network:
-    external: true
+    name: 'projeto3-network'
+      

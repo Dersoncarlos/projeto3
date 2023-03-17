@@ -18,9 +18,6 @@ RUN apt-get update \
 
 RUN docker-php-ext-install bcmath bz2 curl opcache sockets intl
 
-RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
-    && docker-php-ext-install pgsql pdo_pgsql
-
 RUN yes | pecl install xdebug-3.1.5 \
     && echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini 
 
