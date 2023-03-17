@@ -6,13 +6,9 @@ use App\Models\Patient;
 
 class GetPatientByCPF
 {
-    public function __construct(private Patient $_patientModel)
+    public static function execute(string $cpf)
     {
-    }
-
-    public function execute(string $cpf)
-    {
-        $patient = $this->_patientModel->where('cpf', toOnlyNumbers($cpf))->first();
+        $patient = Patient::where('cpf', toOnlyNumbers($cpf))->first();
 
         if (empty($patient)) {
             throw new \Exception("Patient not found", 404);

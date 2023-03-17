@@ -19,7 +19,7 @@ trait JsonResponse
     {
         $message = "Unknown error";
         $code = 500;
-      
+        dd($error);
         if ($error instanceof \Exception) {
             $message =  $error->getMessage();
             if (!empty($error->getCode())) $code = $error->getCode();

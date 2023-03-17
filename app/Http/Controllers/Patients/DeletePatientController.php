@@ -9,11 +9,10 @@ class DeletePatientController
 {
     use JsonResponse;
 
-    public function __invoke(int $patientId, DeletePatient $deletePatient)
+    public function __invoke(int $patientId)
     {
         try {
-
-            $deletePatient->execute($patientId);
+            DeletePatient::execute($patientId);
 
             return $this->ok(null);
         } catch (\Exception $error) {

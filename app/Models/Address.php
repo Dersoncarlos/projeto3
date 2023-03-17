@@ -10,4 +10,15 @@ class Address extends Model
     use HasFactory;
 
     protected $table = "adresses";
+
+    protected $fillable = [
+        'cep',
+        'address',
+        'number',
+        'complement',
+        'neighborhood',
+        'city',
+        'state',
+        'patient_id'
+    ];
 }

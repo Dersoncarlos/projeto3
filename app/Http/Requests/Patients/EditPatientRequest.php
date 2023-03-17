@@ -19,7 +19,7 @@ class EditPatientRequest extends FormRequest
 
     public function prepareForValidation()
     {
-      
+
         $this->merge([
             ...$this->all(),
             'cpf' => toOnlyNumbers($this->get('cpf')),
@@ -29,7 +29,6 @@ class EditPatientRequest extends FormRequest
                 'cep' => toOnlyNumbers($this->input('address.cep'))
             ]
         ]);
-
     }
     /**
      * Get the validation rules that apply to the request.
@@ -40,11 +39,17 @@ class EditPatientRequest extends FormRequest
     {
         return [
             'cpf' => ['required', new ValidCPFRule],
+            'photo' => ['required', 'mimes:png,jpg,jpeg'],
             'full_name' => ['required'],
             'mother_full_name' => ['required'],
             'birthday' => ['required'],
             'cns' => ['required', new ValidCNSRule],
-            'address.cep' => ['required']
+            'address.cep' => ['required'],
+            'address.address' => ['required'],
+            'address.number' => ['required'],
+            'address.neighborhood' => ['required'],
+            'address.city' => ['required'],
+            'address.state' => ['required'],
         ];
     }
 }

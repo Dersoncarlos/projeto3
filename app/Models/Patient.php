@@ -9,6 +9,15 @@ class Patient extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'photo',
+        'full_name',
+        'mother_full_name',
+        'birthday',
+        'cpf',
+        'cns'
+    ];
+
     public function address()
     {
         return $this->hasOne(Address::class);

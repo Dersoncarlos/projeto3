@@ -6,12 +6,8 @@ use App\Models\Patient;
 
 class ListPatients
 {
-    public function __construct(private Patient $_patientModel)
+    public static function execute()
     {
-    }
-
-    public function execute()
-    {
-        return $this->_patientModel->with(['address'])->get();
+        return Patient::with(['address'])->get();
     }
 }

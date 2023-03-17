@@ -9,10 +9,10 @@ class ListPatientsController
 {
     use JsonResponse;
 
-    public function __invoke(ListPatients $listPatients)
+    public function __invoke()
     {
         try {
-            $patients = $listPatients->execute();
+            $patients = ListPatients::execute();
 
             return $this->ok($patients);
         } catch (\Exception $error) {

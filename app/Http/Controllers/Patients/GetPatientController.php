@@ -9,10 +9,10 @@ class GetPatientController
 {
     use JsonResponse;
 
-    public function __invoke(string $cpf, GetPatientByCPF $getPatient)
+    public function __invoke(string $cpf)
     {
         try {
-            $patient = $getPatient->execute($cpf);
+            $patient =  GetPatientByCPF::execute($cpf);
 
             return $this->ok($patient);
         } catch (\Exception $error) {
