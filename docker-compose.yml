@@ -26,33 +26,40 @@ services:
         - ./:/app
     networks:
         - projeto3-network
-  
-  rabbitmq:
-    image: rabbitmq:3-management-alpine
-    container_name: projeto3-rabbitmq
+
+  redis:
+    image: redis:7.0-alpine
+    container_name: projeto3-redis
     restart: always
+    env_file:
+        - .env
+    command: redis-server --save 20 1 --loglevel warning --requirepass guest
     ports:
-      - 5672:5672
-      - 15680:15672
+        - 6379:6379
     volumes:
-      - ./.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/mnesia
-      - ./.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+        - ./.docker-conf/redis-data:/data
     networks:
-      - projeto3-network
+        - projeto3-network
 
   db:
     image: postgres
     restart: always
     container_name: projeto3-db
     volumes:
-        - ./.docker-conf/db:/var/lib/postgresql/data
+        - ./.docker-conf/db:/var/lib/postgresql/data/
     ports:
       - 5432:5432
     networks:
         - projeto3-network
     environment:
-      POSTEGRES_PASSWORD: ${POSTEGRES_ROOT_PASSWORD}
+      POSTGRES_PASSWORD: "4B:s5geAe367sl8787?Z~Mj!"
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 9090:8080
 networks:
   projeto3-network:
     name: 'projeto3-network'
-      
+
