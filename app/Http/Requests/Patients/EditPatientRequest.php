@@ -38,12 +38,12 @@ class EditPatientRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'cpf' => ['required', new ValidCPFRule],
+            'cpf' => ['required', new ValidCPFRule, 'unique:patients,cpf,' . $this->route("patientId")],
             'photo' => ['required', 'mimes:png,jpg,jpeg'],
             'full_name' => ['required'],
             'mother_full_name' => ['required'],
             'birthday' => ['required'],
-            'cns' => ['required', new ValidCNSRule],
+            'cns' => ['required', new ValidCNSRule, 'unique:patients,cns,' . $this->route("patientId")],
             'address.cep' => ['required'],
             'address.address' => ['required'],
             'address.number' => ['required'],

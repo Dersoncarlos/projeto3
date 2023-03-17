@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string("full_name");
             $table->string("mother_full_name");
             $table->string("birthday");
-            $table->bigInteger("cpf");
-            $table->bigInteger("cns")->nullable();
+            $table->string("cpf");
+            $table->string("cns")->nullable();
             $table->timestamps();
         });
     }
