@@ -52,13 +52,15 @@ services:
     networks:
         - projeto3-network
     environment:
-      POSTGRES_PASSWORD: "4B:s5geAe367sl8787?Z~Mj!"
-
+        POSTGRES_PASSWORD: 4B:s5geAe367sl8787?Z~Mj!
+        POSTGRES_USER: postgres
   adminer:
     image: adminer
     restart: always
     ports:
       - 9090:8080
+    networks:
+        - projeto3-network
 networks:
   projeto3-network:
     name: 'projeto3-network'
