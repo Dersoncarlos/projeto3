@@ -4,9 +4,9 @@ namespace App\Http\Requests\Patients;
 
 use App\Rules\ValidCNSRule;
 use App\Rules\ValidCPFRule;
-use Illuminate\Foundation\Http\FormRequest;
 
-class EditPatientRequest extends FormRequest
+
+class EditPatientRequest extends CreatePatientRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -16,20 +16,6 @@ class EditPatientRequest extends FormRequest
         return true;
     }
 
-
-    public function prepareForValidation()
-    {
-
-        $this->merge([
-            ...$this->all(),
-            'cpf' => toOnlyNumbers($this->get('cpf')),
-            'cns' => toOnlyNumbers($this->get('cns')),
-            'address' => [
-                ...$this->input('address'),
-                'zipcode' => toOnlyNumbers($this->input('address.zipcode'))
-            ]
-        ]);
-    }
     /**
      * Get the validation rules that apply to the request.
      *
@@ -38,19 +24,9 @@ class EditPatientRequest extends FormRequest
     public function rules(): array
     {
         return [
+            ...parent::rules(),
             'cpf' => ['required', new ValidCPFRule, 'unique:patients,cpf,' . $this->route("patientId")],
-            'photo' => ['required', 'mimes:png,jpg,jpeg'],
-            'full_name' => ['required'],
-            'mother_full_name' => ['required'],
-            'birthday' => ['required'],
             'cns' => ['required', new ValidCNSRule, 'unique:patients,cns,' . $this->route("patientId")],
-            'address.zipcode' => ['required'],
-            'address.address' => ['required'],
-            'address.number' => ['required'],
-            'address.neighborhood' => ['required'],
-            'address.city' => ['required'],
-            'address.state' => ['required'],
-            'address.complement' => ['required']
         ];
     }
 }

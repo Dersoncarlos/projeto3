@@ -22,9 +22,9 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => 'patients'], function () {
     Route::get('/', ListPatientsController::class);
     Route::get('/{cpf}', GetPatientController::class);
-    Route::delete('/{patientId}', DeletePatientController::class);
-    Route::put('/{patientId}', EditPatientController::class);
     Route::post('/', CreatePatientsController::class);
+    Route::put('/{patientId}', EditPatientController::class);
+    Route::delete('/{patientId}', DeletePatientController::class);
 });
 
 Route::group(['prefix' => 'adresses'], function () {

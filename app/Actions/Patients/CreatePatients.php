@@ -3,24 +3,31 @@
 namespace App\Actions\Patients;
 
 use App\Models\Patient;
+use App\Models\Address;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\DB;
 
 class CreatePatients
 {
-    public function __construct(private Patient $_patientModel) {}
 
-    public static function execute(FormRequest $request): void
+    public static function execute(FormRequest $request)
     {
+        try {
+            DB::beginTransaction();
+            $patient = Patient::create($request->all());
 
-        $photo = $request->file('photo');
+            $photo = $request->file("photo")->store("user/{$patient->id}", ['disk' => 'public']);
 
-        $data = $request->all();
-        $data['photo'] = 'url_img';
+            $patient->photo = $photo;
 
-        $saved = Patient::save($data);
 
-        if (!boolval($saved)) {
-            throw new \Exception("save patient", 200);
+            $patient->address()->save(new Address($request->address));
+
+            $patient->save();
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
         }
     }
 }
