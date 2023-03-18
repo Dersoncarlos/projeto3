@@ -17,7 +17,7 @@ class AddressFactory extends Factory
     public function definition(): array
     {
         return [
-            'cep' => fake()->postcode(false),
+            'zipcode' => toOnlyNumbers(fake()->postcode()),
             'address' => fake()->streetAddress(),
             'number' => fake()->buildingNumber(),
             'complement' => fake()->secondaryAddress(),

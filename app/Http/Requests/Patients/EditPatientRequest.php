@@ -26,7 +26,7 @@ class EditPatientRequest extends FormRequest
             'cns' => toOnlyNumbers($this->get('cns')),
             'address' => [
                 ...$this->input('address'),
-                'cep' => toOnlyNumbers($this->input('address.cep'))
+                'zipcode' => toOnlyNumbers($this->input('address.zipcode'))
             ]
         ]);
     }
@@ -44,12 +44,13 @@ class EditPatientRequest extends FormRequest
             'mother_full_name' => ['required'],
             'birthday' => ['required'],
             'cns' => ['required', new ValidCNSRule, 'unique:patients,cns,' . $this->route("patientId")],
-            'address.cep' => ['required'],
+            'address.zipcode' => ['required'],
             'address.address' => ['required'],
             'address.number' => ['required'],
             'address.neighborhood' => ['required'],
             'address.city' => ['required'],
             'address.state' => ['required'],
+            'address.complement' => ['required']
         ];
     }
 }

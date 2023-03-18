@@ -14,7 +14,7 @@ return new class extends Migration
         // CEP, Endereço, Número, Complemento, Bairro, Cidade e Estado)
         Schema::create('adresses', function (Blueprint $table) {
             $table->id();
-            $table->string("cep");
+            $table->string("zipcode");
             $table->string("address");
             $table->string("number");
             $table->string("complement");

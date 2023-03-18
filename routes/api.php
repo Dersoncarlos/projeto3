@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Adresses\GetAddressByZipCodeController;
 use App\Http\Controllers\Patients\DeletePatientController;
 use App\Http\Controllers\Patients\EditPatientController;
 use App\Http\Controllers\Patients\GetPatientController;
@@ -22,4 +23,8 @@ Route::group(['prefix' => 'patients'], function () {
     Route::get('/{cpf}', GetPatientController::class);
     Route::delete('/{patientId}', DeletePatientController::class);
     Route::put('/{patientId}', EditPatientController::class);
+});
+
+Route::group(['prefix' => 'adresses'], function () {
+    Route::get('cep/{cep}', GetAddressByZipCodeController::class);
 });
